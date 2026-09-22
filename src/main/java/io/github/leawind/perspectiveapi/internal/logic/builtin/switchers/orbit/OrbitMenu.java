@@ -13,6 +13,8 @@ import io.github.leawind.perspectiveapi.internal.logic.builtin.switchers.orbit.p
 import io.github.leawind.perspectiveapi.internal.logic.builtin.switchers.orbit.physics.PairForce;
 import io.github.leawind.perspectiveapi.internal.logic.builtin.switchers.orbit.physics.PhysicsBody;
 import io.github.leawind.perspectiveapi.internal.logic.builtin.switchers.orbit.physics.PhysicsWorld;
+import io.github.leawind.perspectiveapi.internal.bridge.events.MouseInputContext.Action;
+import io.github.leawind.perspectiveapi.internal.bridge.events.MouseInputContext.Button;
 import io.github.leawind.perspectiveapi.internal.utils.WheelAnchor;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +29,6 @@ import net.minecraft.network.chat.Component;
 import org.joml.Vector2d;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
 
 final class OrbitMenu {
   enum Mode {
@@ -212,20 +213,20 @@ final class OrbitMenu {
     context.consumed = true;
   }
 
-  private void onMouseButton(int button, int action, double mouseX, double mouseY) {
-    if (action != GLFW.GLFW_PRESS && action != GLFW.GLFW_RELEASE) return;
+  private void onMouseButton(Button button, Action action, double mouseX, double mouseY) {
+    if (action != Action.PRESS && action != Action.RELEASE) return;
     mouseScreen.set(mouseX, mouseY);
     updateMouseWorld();
 
     if (mode == Mode.SELECTING) {
-      if (action == GLFW.GLFW_PRESS && button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+      if (action == Action.PRESS && button == Button.RIGHT) {
         enterEditing();
       }
       return;
     }
 
-    if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-      if (action == GLFW.GLFW_PRESS) {
+    if (button == Button.LEFT) {
+      if (action == Action.PRESS) {
         if (sponsorButton.contains(mouseX, mouseY)) {
           String languageCode = Minecraft.getInstance().getLanguageManager().getSelected();
           if (EvasiveSponsorButton.isClickEnabled(languageCode)) Bridge.openUri(SPONSOR_URL);
@@ -236,7 +237,7 @@ final class OrbitMenu {
       } else {
         releaseActor(true);
       }
-    } else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT && action == GLFW.GLFW_PRESS) {
+    } else if (button == Button.RIGHT && action == Action.PRESS) {
       exitEditing();
     }
   }
