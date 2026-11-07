@@ -17,7 +17,7 @@ import net.minecraft.resources.Identifier;
 import org.joml.Vector2fc;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.Blaze3D;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,7 +88,7 @@ public final class WheelMenuRenderer {
       @NonNull WheelAnchor anchor,
       @NonNull List<WheelMenuItem> items,
       @Nullable String selectedId) {
-    double now = GLFW.glfwGetTime();
+    double now = Blaze3D.getTime();
     double deltaTime = now - lastRenderTime;
     lastRenderTime = now;
     deltaTime = Math.max(deltaTime, 0);
