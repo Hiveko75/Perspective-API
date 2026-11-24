@@ -3,9 +3,8 @@
 # runner's checkout), which keeps the build fast. The source in the repository is unchanged.
 name: Build 26.3 (Fabric)
 
+# Started by hand only (Actions -> Run workflow): no builds on push or pull requests.
 on:
-  push:
-    branches: [port-26.3]
   workflow_dispatch:
 
 permissions:

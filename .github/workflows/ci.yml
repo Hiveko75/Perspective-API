@@ -1,11 +1,6 @@
 name: CI
+# Started by hand only (Actions -> Run workflow): no builds on push or pull requests.
 on:
-  push:
-    branches:
-      - release
-      - beta
-      - dev
-  pull_request:
   workflow_dispatch:
 
 permissions:
