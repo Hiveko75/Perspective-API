@@ -42,3 +42,4 @@ jobs:
         with:
           name: perspective-api-26.3-fabric
           path: versions/26.3-fabric/build/libs/*.jar
+          retention-days: 14

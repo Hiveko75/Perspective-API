@@ -81,3 +81,4 @@ jobs:
         with:
           name: Artifacts
           path: build/libs/*.jar
+          retention-days: 14
